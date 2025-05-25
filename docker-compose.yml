@@ -47,7 +47,7 @@ services:
     networks:
       - orchestrator-saga
     environment:
-      - POSTGRES_DB=payment-db
+      - POSTGRES_DB=inventory-db
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     ports:
