@@ -7,8 +7,6 @@ spring:
     consumer:
       group-id: orchestrator-group
       auto-offset-reset: latest
-    template:
-      default-topic: teste
 logging:
   level:
     org:
