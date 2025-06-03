@@ -1,6 +1,7 @@
 package br.com.microservices.orchestrated.orchestratorservice.config;
 
 import lombok.RequiredArgsConstructor;
+import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.annotation.EnableKafka;
+import org.springframework.kafka.config.TopicBuilder;
 import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -16,6 +18,18 @@ import org.springframework.kafka.core.ProducerFactory;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import static br.com.microservices.orchestrated.orchestratorservice.TopicsEnum.BASE_ORCHESTRATOR;
+import static br.com.microservices.orchestrated.orchestratorservice.TopicsEnum.FINISH_FAIL;
+import static br.com.microservices.orchestrated.orchestratorservice.TopicsEnum.FINISH_SUCCESS;
+import static br.com.microservices.orchestrated.orchestratorservice.TopicsEnum.INVENTORY_FAIL;
+import static br.com.microservices.orchestrated.orchestratorservice.TopicsEnum.INVENTORY_SUCCESS;
+import static br.com.microservices.orchestrated.orchestratorservice.TopicsEnum.NOTIFY_ENDING;
+import static br.com.microservices.orchestrated.orchestratorservice.TopicsEnum.PAYMENT_FAIL;
+import static br.com.microservices.orchestrated.orchestratorservice.TopicsEnum.PAYMENT_SUCCESS;
+import static br.com.microservices.orchestrated.orchestratorservice.TopicsEnum.PRODUCT_VALIDATION_FAIL;
+import static br.com.microservices.orchestrated.orchestratorservice.TopicsEnum.PRODUCT_VALIDATION_SUCCESS;
+import static br.com.microservices.orchestrated.orchestratorservice.TopicsEnum.START_SAGA;
 
 @EnableKafka
 @Configuration
@@ -66,5 +80,67 @@ public class KafkaConfig {
     @Bean
     public KafkaTemplate<String, String> kafkaTemplate(ProducerFactory<String, String> producer) {
         return new KafkaTemplate<>(producer);
+    }
+
+    @Bean
+    public NewTopic startSagaTopic() {
+        return createTopic(START_SAGA.getTopic());
+    }
+
+    @Bean
+    public NewTopic orchestratorTopic() {
+        return createTopic(BASE_ORCHESTRATOR.getTopic());
+    }
+
+    @Bean
+    public NewTopic finishSuccessTopic() {
+        return createTopic(FINISH_SUCCESS.getTopic());
+    }
+
+    @Bean
+    public NewTopic finishFailTopic() {
+        return createTopic(FINISH_FAIL.getTopic());
+    }
+
+    @Bean
+    public NewTopic productValidationSuccessTopic() {
+        return createTopic(PRODUCT_VALIDATION_SUCCESS.getTopic());
+    }
+
+    @Bean
+    public NewTopic productValidationFailTopic() {
+        return createTopic(PRODUCT_VALIDATION_FAIL.getTopic());
+    }
+
+    @Bean
+    public NewTopic paymentSuccessTopic() {
+        return createTopic(PAYMENT_SUCCESS.getTopic());
+    }
+
+    @Bean
+    public NewTopic paymentFailTopic() {
+        return createTopic(PAYMENT_FAIL.getTopic());
+    }
+
+    @Bean
+    public NewTopic inventorySuccessTopic() {
+        return createTopic(INVENTORY_SUCCESS.getTopic());
+    }
+
+    @Bean
+    public NewTopic inventoryFailTopic() {
+        return createTopic(INVENTORY_FAIL.getTopic());
+    }
+
+    @Bean
+    public NewTopic notifyEndingTopic() {
+        return createTopic(NOTIFY_ENDING.getTopic());
+    }
+
+    private NewTopic createTopic(String topicName) {
+        return TopicBuilder.name(topicName)
+                .partitions(1)
+                .replicas(1)
+                .build();
     }
 }

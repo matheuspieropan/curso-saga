@@ -17,14 +17,13 @@ spring:
     bootstrap-servers: ${KAFKA_BROKER:localhost:9092}
     topic:
       orchestrator: orchestrator
-      inventory-sucess: inventory-sucess
-      inventory-fail: inventory-fail
+      product-validation-success: product-validation-success
+      product-validation-fail: product-validation-fail
     consumer:
       group-id: product-validation-group
       auto-offset-reset: latest
 logging:
-    level:
-      org:
-        apache:
-          kafka: OFF
-app.
+  level:
+    org:
+      apache:
+        kafka: OFF

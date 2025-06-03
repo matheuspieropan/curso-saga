@@ -16,7 +16,7 @@ spring:
     bootstrap-servers: ${KAFKA_BROKER:localhost:9092}
     topic:
       orchestrator: orchestrator
-      inventory-sucess: inventory-sucess
+      inventory-success: inventory-success
       inventory-fail: inventory-fail
     consumer:
       group-id: inventory-group

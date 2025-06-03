@@ -1,6 +1,7 @@
 package br.com.microservices.orchestrated.orderservice.config;
 
 import lombok.RequiredArgsConstructor;
+import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.annotation.EnableKafka;
+import org.springframework.kafka.config.TopicBuilder;
 import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -30,6 +32,12 @@ public class KafkaConfig {
 
     @Value("${spring.kafka.consumer.auto-offset-reset}")
     private String AUTO_OFFSET_RESET;
+
+    @Value("${spring.kafka.topic.start-saga}")
+    private String START_SAGA;
+
+    @Value("${spring.kafka.topic.notify-ending}")
+    private String NOTIFY_ENDING;
 
     @Bean
     public ConsumerFactory<String, String> consumerFactory() {
@@ -66,5 +74,22 @@ public class KafkaConfig {
     @Bean
     public KafkaTemplate<String, String> kafkaTemplate(ProducerFactory<String, String> producer) {
         return new KafkaTemplate<>(producer);
+    }
+
+    @Bean
+    public NewTopic startSagaTopic() {
+        return createTopic(START_SAGA);
+    }
+
+    @Bean
+    public NewTopic notifyTopic() {
+        return createTopic(NOTIFY_ENDING);
+    }
+
+    private NewTopic createTopic(String START_SAGA) {
+        return TopicBuilder.name(START_SAGA)
+                .partitions(1)
+                .replicas(1)
+                .build();
     }
 }
