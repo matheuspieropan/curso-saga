@@ -19,17 +19,17 @@ import org.springframework.kafka.core.ProducerFactory;
 import java.util.HashMap;
 import java.util.Map;
 
-import static br.com.microservices.orchestrated.orchestratorservice.TopicsEnum.BASE_ORCHESTRATOR;
-import static br.com.microservices.orchestrated.orchestratorservice.TopicsEnum.FINISH_FAIL;
-import static br.com.microservices.orchestrated.orchestratorservice.TopicsEnum.FINISH_SUCCESS;
-import static br.com.microservices.orchestrated.orchestratorservice.TopicsEnum.INVENTORY_FAIL;
-import static br.com.microservices.orchestrated.orchestratorservice.TopicsEnum.INVENTORY_SUCCESS;
-import static br.com.microservices.orchestrated.orchestratorservice.TopicsEnum.NOTIFY_ENDING;
-import static br.com.microservices.orchestrated.orchestratorservice.TopicsEnum.PAYMENT_FAIL;
-import static br.com.microservices.orchestrated.orchestratorservice.TopicsEnum.PAYMENT_SUCCESS;
-import static br.com.microservices.orchestrated.orchestratorservice.TopicsEnum.PRODUCT_VALIDATION_FAIL;
-import static br.com.microservices.orchestrated.orchestratorservice.TopicsEnum.PRODUCT_VALIDATION_SUCCESS;
-import static br.com.microservices.orchestrated.orchestratorservice.TopicsEnum.START_SAGA;
+import static br.com.microservices.orchestrated.orchestratorservice.core.enums.TopicsEnum.BASE_ORCHESTRATOR;
+import static br.com.microservices.orchestrated.orchestratorservice.core.enums.TopicsEnum.FINISH_FAIL;
+import static br.com.microservices.orchestrated.orchestratorservice.core.enums.TopicsEnum.FINISH_SUCCESS;
+import static br.com.microservices.orchestrated.orchestratorservice.core.enums.TopicsEnum.INVENTORY_FAIL;
+import static br.com.microservices.orchestrated.orchestratorservice.core.enums.TopicsEnum.INVENTORY_SUCCESS;
+import static br.com.microservices.orchestrated.orchestratorservice.core.enums.TopicsEnum.NOTIFY_ENDING;
+import static br.com.microservices.orchestrated.orchestratorservice.core.enums.TopicsEnum.PAYMENT_FAIL;
+import static br.com.microservices.orchestrated.orchestratorservice.core.enums.TopicsEnum.PAYMENT_SUCCESS;
+import static br.com.microservices.orchestrated.orchestratorservice.core.enums.TopicsEnum.PRODUCT_VALIDATION_FAIL;
+import static br.com.microservices.orchestrated.orchestratorservice.core.enums.TopicsEnum.PRODUCT_VALIDATION_SUCCESS;
+import static br.com.microservices.orchestrated.orchestratorservice.core.enums.TopicsEnum.START_SAGA;
 
 @EnableKafka
 @Configuration
