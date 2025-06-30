@@ -1,6 +1,6 @@
 package br.com.microservices.orchestrated.paymentservice.core.dto;
 
-import br.com.microservices.orchestrated.productvalidationservice.core.enums.SagaStatusEnum;
+import br.com.microservices.orchestrated.paymentservice.core.enums.SagaStatusEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
